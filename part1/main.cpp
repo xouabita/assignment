@@ -29,6 +29,16 @@ template <class T> class List {
     }
   }
 
+  void push_back (T e) {
+    if (queue == NULL) {
+      head = queue = new Node<T> (e);
+    }
+    else {
+      queue->next = new Node<T> (e);
+      queue = queue->next;
+    }
+  }
+
   friend ostream & operator << (ostream & os, List l) {
     if (l.head != NULL) {
       Node<T> * n = l.head;
@@ -49,8 +59,17 @@ int main () {
   cout << l << endl;
   l.push_front(6);
   l.push_front(9);
-  l.push_front(3);
+  cout << l << endl;
+  l.push_back(3);
   l.push_front(7);
 
   cout << l << endl;
+
+  List<int> l2;
+  l2.push_back(1);
+  cout << l2 << endl;
+  l2.push_back(2);
+  cout << l2 << endl;
+  l2.push_front(0);
+  cout << l2 << endl;
 }
