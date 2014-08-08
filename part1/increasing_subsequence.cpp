@@ -39,7 +39,7 @@ template <class T> class Array {
 
   ~Array () { delete[] this->data; }
 
-  int size() { return size; }
+  int size() { return m_size; }
 
   friend ostream & operator << (ostream & os, Array & arr) {
     os << "[ ";
@@ -47,7 +47,7 @@ template <class T> class Array {
       os << arr[i] << ", ";
     }
 
-    if (arr.size() > 0) { os << arr[arr.size()-1] << endl; }
+    if (arr.size() > 0) { os << arr[arr.size()-1]; }
     os << " ]";
     return os;
   }
@@ -59,4 +59,12 @@ template <class T> class Array {
 
 int main () {
   Array<int> a1 ({42,45,72,38,45,88});
+  Array<int> a_empty ({});
+
+  cout << a1 << endl;
+  cout << a_empty << endl;
+  cout << "a1[2]: " << a1[2] << " (expect: 72)" << endl << endl;
+
+  a1[2] = 69;
+  cout << a1 << endl;
 }
