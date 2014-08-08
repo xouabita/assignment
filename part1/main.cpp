@@ -60,18 +60,24 @@ template <class T> class List {
     cp (l);
   }
 
+  List (List && l): size (0), head (NULL), tail (NULL) {
+    cp (l);
+  }
+
   // Initialize a list with {} list elements
   List (std::initializer_list<T> args): size (0), head (NULL), tail (NULL) {
     for (auto item: args) this->push_back(item);
   }
 
   // Assign operator
-  List operator= (List & l) {
-    this->del();
-    head = tail = NULL;
-    size = 0;
-    cp (l);
-    return *this;
+  List operator= (const List & l) {
+    if (&l != this) {
+      this->del();
+      head = tail = NULL;
+      size = 0;
+      cp (l);
+      return *this;
+    }
   }
 
   // Deletion of the List
@@ -103,6 +109,17 @@ template <class T> class List {
   // Return the size of the list
   int getSize() { return size; }
 
+  List sub (int index, int length) {
+    if (index < 0 || index >= size) throw "Index is out of bounds";
+    if (length <= 0 || index+length > size) throw "Length is invalid";
+    List res;
+    int limit = index+length;
+    for (int i=index; i < limit; i++) {
+      res.push_back((*this)[i]);
+    }
+    return res;
+  }
+
   // Display list into ostream
   friend ostream & operator << (ostream & os, List l) {
     if (l.head != NULL) {
@@ -124,6 +141,18 @@ template <class T> class List {
 };
 
 int main () {
-  List<int> l4 ({2,7,8,9,2,6});
-  cout << l4 << endl;
+  List<int> l ({2,7,8,9,2,6,10,67,23});
+  cout << l << endl;
+
+  List<int> sl1 = l.sub(0,2); // Expect 2 -> 7
+  List<int> sl2 = l.sub(2,4); // Expect 8 -> 9 -> 2 -> 6
+
+  cout << sl1 << endl;
+  cout << sl2 << endl;
+
+  List<int> l_part1 = l.sub(0,(l.getSize()/2));
+  List<int> l_part2 = l.sub((l.getSize()/2),(l.getSize()-(l.getSize()/2)));
+
+  cout << "part 1: " << l_part1 << endl;
+  cout << "part 2: " << l_part2 << endl;
 }
