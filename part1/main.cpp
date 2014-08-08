@@ -1,4 +1,5 @@
 #include <iostream>
+#include <initializer_list>
 
 using namespace std;
 
@@ -12,9 +13,9 @@ template <class T> struct Node {
 };
 
 template <class T> class List {
+  int size;
   Node<T> * head;
   Node<T> * queue;
-  int size;
 
   Node<T> * getNode (int i) {
     Node<T> * res = NULL;
@@ -42,17 +43,18 @@ template <class T> class List {
       delete n;
     }
     head = queue = NULL;
-  }
-
-  public:
-  List () {
-    head = queue = NULL;
     size = 0;
   }
 
-  List (List & l) {
-    List ();
+  public:
+  List (): size (0), head (NULL), queue (NULL) {}
+
+  List (List & l): size (0), head (NULL), queue (NULL) {
     cp (l);
+  }
+
+  List (std::initializer_list<T> args): size (0), head (NULL), queue (NULL) {
+    for (auto item: args) this->push_back(item);
   }
 
   List operator= (List & l) {
@@ -106,43 +108,6 @@ template <class T> class List {
 };
 
 int main () {
-  // Basic Tests for Linked List
-  List<int> l;
-  cout << l << endl;
-  l.push_front(8);
-  cout << l << " | size="<< l.getSize() <<endl;
-  l.push_front(6);
-  l.push_front(9);
-  cout << l << " | size="<< l.getSize() <<endl;
-  l.push_back(3);
-  l.push_front(7);
-
-  cout << l << " | size="<< l.getSize() <<endl;
-  cout << "l[O]: " << l[0] << ", ";
-  cout << "l[2]: " << l[2] << ", ";
-  cout << "l[4]: " << l[4] << endl;
-
-  List<int> l2;
-  l2.push_back(1);
-  cout << l2 << endl;
-  l2.push_back(2);
-  cout << l2 << endl;
-  l2.push_front(0);
-  cout << l2 << endl;
-
-  // Test copy constructor and delete
-  List<int> l3 (l2);
-  cout << "l2: " << l2 << endl;
-  cout << "l3: " << l3 << endl;
-
-  l2.push_back (-2);
-  l3.push_back (3);
-  l2.push_front (-1);
-  l3.push_front (4);
-
-  cout << "l2: " << l2 << " | size="<< l2.getSize() <<endl;
-  cout << "l3: " << l3 << " | size="<< l3.getSize() <<endl;
-
-  l2 = l;
-  cout << "l2: " << l2 << " | size="<< l2.getSize() <<endl;
+  List<int> l4 ({2,7,8,9,2,6});
+  cout << l4 << endl;
 }
