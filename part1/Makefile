@@ -1,17 +1,17 @@
 CC = g++
 CFLAGS= -std=c++11 -Wall -g -pedantic -Wno-long-long -Werror
 
-all: ./main ./increasing_subsequence
+all: ./intersection ./increasing_subsequence
 
-run: ./main
+run: ./intersection ./increasing_subsequence
 	./main
 	./increasing_subsequence
 
-./main: main.cpp
+./intersection: intersection.cpp
 	$(CC) $(CFLAGS) $< -o $@
 
 ./increasing_subsequence: ./increasing_subsequence.cpp
 	$(CC) $(CFLAGS) $< -o $@
 
 clean:
-	rm -rf ./main ./increasing_subsequence  *.dSYM
+	rm -rf ./intersection ./increasing_subsequence  *.dSYM

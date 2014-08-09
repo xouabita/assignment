@@ -1,70 +1,41 @@
-#include <iostream>
-#include <initializer_list>
+#include "Array.h"
 
-using namespace std;
-
-template <class T> class Array {
-  T * data;
-  int m_size;
-
-  public:
-  Array (std::initializer_list<T> args) : m_size (args.size()) {
-    data = new T[m_size];
-    int i = 0;
-    for (auto item: args) {
-      data[i] = item;
-      i++;
+template <class T> Array<T> longest_increasing_continuous_subsequence (Array<T> arry) {
+  int start = 0;
+  int max_start = 0;
+  int length = 1;
+  int max_length = 1;
+  for (int i=0; i < arry.size()-1; i++) {
+    if (arry[i] < arry[i+1]) {
+      length++;
+    } else {
+      if (length > max_length) {
+        max_start  = start;
+        max_length = length;
+      }
+      start = i+1; length = 1;
     }
   }
 
-  Array (Array & arr) : m_size(arr.size()) {
-    data = new T[m_size];
-    for (int i = 0; i < m_size; i++) data[i] = arr[i];
+  // Return result :
+  Array<T> res (max_length);
+  int lim = max_start+max_length;
+  int i = 0;
+  for (; max_start < lim; max_start++ ) {
+    res[i] = arry[max_start];
+    i++;
   }
 
-  Array (Array && arr) {
-    data = new T[m_size];
-    for (int i = 0; i < m_size; i++) data[i] = arr[i];
-  }
-
-  Array operator= (const Array & arr) {
-    if (&arr != this) {
-      delete[] this->data;
-      this->m_size = arr.size();
-      data = new T[m_size];
-      for (int i = 0; i < m_size; i++) data[i] = arr[i];
-    }
-    return *this;
-  }
-
-  ~Array () { delete[] this->data; }
-
-  int size() { return m_size; }
-
-  friend ostream & operator << (ostream & os, Array & arr) {
-    os << "[ ";
-    for (int i=0; i < arr.size()-1; i++) {
-      os << arr[i] << ", ";
-    }
-
-    if (arr.size() > 0) { os << arr[arr.size()-1]; }
-    os << " ]";
-    return os;
-  }
-
-  T operator[] (int i) const { return this->data[i]; }
-
-  T& operator[] (int i) { return this->data[i]; }
-};
+  return res;
+}
 
 int main () {
-  Array<int> a1 ({42,45,72,38,45,88});
-  Array<int> a_empty ({});
+  Array<int> arr1 ({1,5,8,9,78,100,999,10000,2,4,6,8,10,2,3,5,7,42,98,2,1});
+  Array<int> arr2 ({1,4,2,5,8,9,2,3,4});
 
-  cout << a1 << endl;
-  cout << a_empty << endl;
-  cout << "a1[2]: " << a1[2] << " (expect: 72)" << endl << endl;
+  cout << "Longest increasing continuous subsequence in " << arr1 << " is:" << endl;
+  cout << longest_increasing_continuous_subsequence(arr1) << endl;
 
-  a1[2] = 69;
-  cout << a1 << endl;
+  cout << "Longest increasing continuous subsequence in " << arr2 << " is:" << endl;
+  cout << longest_increasing_continuous_subsequence(arr2) << endl;
 }
