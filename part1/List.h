@@ -106,6 +106,14 @@ template <class T> class List {
     size++;
   }
 
+  T back() {
+    return tail->data;
+  }
+
+  T front() {
+    return head->data;
+  }
+
   // Return the size of the list
   int getSize() { return size; }
 
@@ -176,7 +184,11 @@ template <class T> class List {
   }
 
   // Get an element in the list as for an array
-  T operator [] (int i) {
+  T operator [] (int i) const {
+    return getNode(i)->data;
+  }
+
+  T& operator [] (int i) {
     return getNode(i)->data;
   }
 };
