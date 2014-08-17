@@ -60,7 +60,7 @@ module.exports = (grunt) ->
     express:
       all:
         options:
-          port: grunt.initConfig.port
+          port: "<%= port %>"
           hostname: "0.0.0.0"
           bases: ["<%= output %>"]
           livereload: true
@@ -78,4 +78,11 @@ module.exports = (grunt) ->
     "concat:vendor"
     "coffee:sources"
     "compass"
+  ]
+
+  grunt.registerTask "serve", [
+    "build"
+    "express"
+    "open"
+    "watch"
   ]
