@@ -1,0 +1,21 @@
+{
+  "name": "part2",
+  "version": "0.0.1",
+  "homepage": "https://github.com/xouabita/assignement",
+  "authors": [
+    "xouabita <xouabita@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "/src/assets/components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.2.22"
+  }
+}
