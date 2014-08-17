@@ -39,12 +39,7 @@ module.exports = (grunt) ->
         dest: "<%= output %>/vendor.js"
 
     clean:
-      output:
-        files: [
-          expand: true
-          cwd: "<%= output %>"
-          src: "[**]"
-        ]
+      output: ["<%= output %>/**/*"]
 
     watch:
       options:
@@ -65,7 +60,7 @@ module.exports = (grunt) ->
     express:
       all:
         options:
-          port: port
+          port: grunt.initConfig.port
           hostname: "0.0.0.0"
           bases: ["<%= output %>"]
           livereload: true
