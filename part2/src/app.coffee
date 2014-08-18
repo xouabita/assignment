@@ -17,4 +17,5 @@ FlickrSearch.controller "flickrCtrl", ($scope,Flickr) ->
       $scope.images = res.data.items
       return
     return
+  $scope.search()
   return
