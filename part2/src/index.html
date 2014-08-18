@@ -6,10 +6,16 @@
   <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
-
   <div ng-controller="flickrCtrl">
-    <input type="text" placeholder="Search" ng-model="query" ng-change="search()">
-    <img ng-repeat="image in images" ng-src="{{ image.media.m }}" />
+    <div class="top">
+      <div class="header">
+        <h1>Flickr Search</h1>
+      </div>
+      <input type="text" placeholder="Search" ng-model="query" ng-change="search()">
+    </div>
+    <div class="images">
+      <img ng-repeat="image in images" ng-src="{{ image.media.m }}" />
+    </div>
   </div>
 
   <script src="vendor.js"></script>

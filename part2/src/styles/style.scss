@@ -1,1 +1,35 @@
+@import "compass/reset";
 
+$bg-top: #62becb;
+
+.top {
+  width: 100%;
+  position: fixed;
+  background-color: darken($bg-top,10);
+  top: 0;
+  height: 6.7em;
+  .header {
+    font-size: 2em;
+    width: 100%;
+    text-align: center;
+    font-family: "Helvetica Neue";
+    padding: 10px 0;
+    color: #fff;
+  }
+  input {
+    width: 100%;
+    font-size: 1.5em;
+    padding: 0.5em 3px;
+    box-sizing: border-box;
+    border: none;
+    background-color: lighten($bg-top,30);
+    font-family: "Helvetica";
+    &:focus {
+      outline: 0;
+    }
+  }
+}
+
+.images {
+  margin-top: 7em;
+}
