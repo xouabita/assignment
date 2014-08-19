@@ -35,7 +35,19 @@ You can see the function and some examples in `increasing_subsequence.cpp`.
 Longest Increasing Subsequence
 ------------------------------
 
+- L represent the size of the longest increasing subsequence found yet
+- The array P store the different indexes of the previous element in a subsequence.
+- The array M store the indexes of the end of the different subsequences found.
 
+The algorithm iterate the array. Firstly, it will find the biggest element inferior to the current value in the part of the
+array that is already iterate (the predecessor of the current element), with binary search. Then, it will store the index  
+of the predecessor in the array P.  
+If the `newL` variable is superior to the size of the longest  
+subsequence found so far, it will store this index in M and change the value of `L`.
+If the value is inferior than the value of the last item of the increasing subsequence of the same size, it will store this
+value in M.
+
+After that, we just need to construct the array of the longest increasing subsequence with the two arrays.
 
 Part 2
 ======
