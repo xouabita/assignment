@@ -1,4 +1,4 @@
-FlickrSearch = angular.module "FlickrSearch", []
+FlickrSearch = angular.module "FlickrSearch", ["infinite-scroll"]
 
 FlickrSearch.factory 'Flickr', ($http) ->
   search: (query) ->
@@ -12,10 +12,19 @@ FlickrSearch.factory 'Flickr', ($http) ->
     ).success (data) -> return data
 
 FlickrSearch.controller "flickrCtrl", ($scope,Flickr) ->
+
+  $scope.images = []
+
   $scope.search = ->
     Flickr.search($scope.query).then (res) ->
       $scope.images = res.data.items
       return
     return
-  $scope.search()
+
+  $scope.loadMore = ->
+    Flickr.search($scope.query).then (res) ->
+      for item in res.data.items
+        $scope.images.push item
+      return
+    return
   return

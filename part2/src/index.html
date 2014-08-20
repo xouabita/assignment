@@ -13,7 +13,7 @@
       </div>
       <input type="text" placeholder="Search" ng-model="query" ng-change="search()">
     </div>
-    <div class="images">
+    <div infinite-scroll='loadMore()' infinite-scroll-distance='4'>
       <img ng-repeat="image in images" ng-src="{{ image.media.m }}" />
     </div>
   </div>
