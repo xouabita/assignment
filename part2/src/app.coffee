@@ -10,6 +10,7 @@ FlickrSearch.factory 'Flickr', ($http) ->
         'jsoncallback':'JSON_CALLBACK'
         'tags': query
     ).success (data) -> return data
+  busy: false
 
 FlickrSearch.controller "flickrCtrl", ($scope,Flickr) ->
 
@@ -22,9 +23,13 @@ FlickrSearch.controller "flickrCtrl", ($scope,Flickr) ->
     return
 
   $scope.loadMore = ->
-    Flickr.search($scope.query).then (res) ->
+    return if Flickr.busy
+    Flickr.busy = true
+    Flickr.search($scope.query, $scope.page).then (res) ->
       for item in res.data.items
         $scope.images.push item
+      Flickr.busy = false
+      $scope.$apply()
       return
     return
   return
