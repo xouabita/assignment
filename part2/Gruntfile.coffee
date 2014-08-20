@@ -34,7 +34,9 @@ module.exports = (grunt) ->
         separator: ";"
       vendor:
         src: [
-          "<%= components %>/angular/angular.min.js"
+          "<%= components %>/jquery/dist/jquery.js"
+          "<%= components %>/angular/angular.js"
+          "<%= components %>/ngInfiniteScroll/build/ng-infinite-scroll.js"
         ]
         dest: "<%= output %>/vendor.js"
 
