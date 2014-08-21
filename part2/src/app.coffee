@@ -43,3 +43,13 @@ FlickrSearch.directive "photo", ->
     phWidth: '@'
     phHeight: '@'
   template: '<div class="photo" ><img src="{{ phUrl }}" /></div>'
+  link: ($scope, $element, $attr) ->
+    $element.find('img')[0].onload = ->
+      h = this.naturalHeight
+      w = this.naturalWidth
+      if w > h
+        this.className = "height-100"
+      else
+        this.className = "width-100"
+      return
+    return
