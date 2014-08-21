@@ -3,18 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <title>Angular</title>
+  <link rel="stylesheet" href="styles/vendor.css">
   <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
   <div ng-controller="flickrCtrl">
     <div class="top">
       <div class="header">
-        <h1>Flickr Search</h1>
+        <h1>Flickr Public Feed</h1>
       </div>
       <input type="text" placeholder="Search" ng-model="query" ng-change="search()">
     </div>
-    <div infinite-scroll='loadMore()' infinite-scroll-distance='4'>
-      <img ng-repeat="image in images" ng-src="{{ image.media.m }}" />
+    <div class="photos" infinite-scroll='loadMore()' infinite-scroll-distance='1'>
+      <photo ng-repeat="image in images" ph-url="{{ image.media.m }}" />
     </div>
   </div>
 

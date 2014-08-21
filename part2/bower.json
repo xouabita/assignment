@@ -18,6 +18,7 @@
   "dependencies": {
     "angular": "~1.2.22",
     "ngInfiniteScroll": "~1.1.2",
-    "jquery": "~2.1.1"
+    "jquery": "~2.1.1",
+    "justifiedGallery": "https://github.com/miromannino/Justified-Gallery.git#~3.2.0"
   }
 }

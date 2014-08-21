@@ -30,6 +30,33 @@ $bg-top: #62becb;
   }
 }
 
+.photos {
+  text-align: center
+}
+
+.photo {
+  width: 16.6666666667vw;
+  height: 16.6666666667vw;
+  overflow: hidden;
+  display: inline-block;
+  text-align: center;
+  img {
+    width: 200%;
+    height: auto;
+    position: relative;
+    left: 100%;
+    margin-left: -200%;
+    transition: width ease-in-out 2s;
+  }
+  &:hover {
+    cursor: crosshair;
+    img {
+      width: 150%;
+      transition: width ease-in-out 2s;
+    }
+  }
+}
+
 body {
   padding-top: 6.8em
 }

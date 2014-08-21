@@ -32,13 +32,19 @@ module.exports = (grunt) ->
     concat:
       options:
         separator: ";"
-      vendor:
+      scripts:
         src: [
           "<%= components %>/jquery/dist/jquery.js"
+          "<%= components %>/justifiedGallery/dist/js/jquery.justifiedGallery.js"
           "<%= components %>/angular/angular.js"
           "<%= components %>/ngInfiniteScroll/build/ng-infinite-scroll.js"
         ]
         dest: "<%= output %>/vendor.js"
+      css:
+        src: [
+          "<%= components %>/justifiedGallery/dist/css/justifiedGallery.css"
+        ]
+        dest: "<%= output %>/styles/vendor.css"
 
     clean:
       output: ["<%= output %>/**/*"]
@@ -77,7 +83,8 @@ module.exports = (grunt) ->
     "clean:output"
     "copy:assets"
     "copy:html"
-    "concat:vendor"
+    "concat:scripts"
+    "concat:css"
     "coffee:sources"
     "compass"
   ]

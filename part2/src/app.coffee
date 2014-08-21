@@ -11,10 +11,13 @@ FlickrSearch.factory 'Flickr', ($http) ->
         'tags': query
     ).success (data) -> return data
   busy: false
+  images: []
+
 
 FlickrSearch.controller "flickrCtrl", ($scope,Flickr) ->
 
   $scope.images = []
+  $scope.rowHeight = 
 
   $scope.search = ->
     Flickr.search($scope.query).then (res) ->
@@ -29,7 +32,14 @@ FlickrSearch.controller "flickrCtrl", ($scope,Flickr) ->
       for item in res.data.items
         $scope.images.push item
       Flickr.busy = false
-      $scope.$apply()
       return
     return
   return
+
+FlickrSearch.directive "photo", ->
+  restrict: 'E'
+  scope:
+    phUrl: '@'
+    phWidth: '@'
+    phHeight: '@'
+  template: '<div class="photo" ><img src="{{ phUrl }}" /></div>'
