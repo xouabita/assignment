@@ -38,6 +38,18 @@ $bg-top: #62becb;
 .photo {
   width: 20vw;
   height: 20vw;
+  @media screen and (max-width: 1000px) {
+    width: 25vw;
+    height: 25vw;
+  }
+  @media screen and (max-width: 750px) {
+    width: 33.3334vw;
+    height: 33.3334vw;
+  }
+  @media screen and (max-width: 500px) {
+    width: 50vw;
+    height: 50vw;
+  }
   overflow: hidden;
   display: inline-block;
   text-align: center;
