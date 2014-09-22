@@ -1,17 +1,19 @@
 FlickrSearch = angular.module "FlickrSearch", ["infinite-scroll"]
 
-FlickrSearch.factory 'Flickr', ($http) ->
-  search: (query) ->
-    $http(
-      method: 'JSONP'
-      url: 'http://api.flickr.com/services/feeds/photos_public.gne'
-      params:
-        'format':'json'
-        'jsoncallback':'JSON_CALLBACK'
-        'tags': query
-    ).success (data) -> return data
-  busy: false
-  images: []
+FlickrSearch.provider 'Flickr',
+  $get:
+    ($http) ->
+      search: (query) ->
+        $http(
+          method: 'JSONP'
+          url: 'http://api.flickr.com/services/feeds/photos_public.gne'
+          params:
+            'format':'json'
+            'jsoncallback':'JSON_CALLBACK'
+            'tags': query
+        ).success (data) -> return data
+      busy: false
+      images: []
 
 
 FlickrSearch.controller "flickrCtrl", ($scope,Flickr) ->
