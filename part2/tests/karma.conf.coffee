@@ -5,10 +5,11 @@ module.exports = (config) ->
     files: [
       'public/vendor.js'
       'public/app.js'
+      'src/components/angular-mocks/angular-mocks.js'
       'tests/specs/**/*.coffee'
     ]
     preprocessors:
-      '**/*.coffee': 'coffee'
+      '**/*.coffee': ['coffee']
     reporters: ['progress']
     port: 8081
     colors: yes
