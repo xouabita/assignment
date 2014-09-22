@@ -4,6 +4,7 @@ gulp   = require 'gulp'
 coffee  = require 'gulp-coffee'
 compass = require 'gulp-compass'
 concat  = require 'gulp-concat'
+del     = require 'del'
 
 #### Setup static server w/ livereload
 embedlr    = require 'gulp-embedlr'
@@ -55,7 +56,7 @@ gulp.task 'concat', ->
   .pipe(gulp.dest("./public/"))
   .pipe(refresh(lrserver))
 
-gulp.task 'build', ["coffee","concat","copy"]
+gulp.task 'build', ["coffee","concat","copy","compass"]
 
 #### Watch files
 gulp.task 'watch', ->
@@ -64,7 +65,11 @@ gulp.task 'watch', ->
   gulp.watch("./src/index.html", ['copy'])
 
 #### Serve the files
-gulp.task 'serve', ->
+gulp.task 'serve', ["build"] , ->
   server.listen(server_port)
   lrserver.listen(livereload_port)
   gulp.run('watch')
+
+#### Clean the files
+gulp.task 'clean', ->
+  del(['public'])
