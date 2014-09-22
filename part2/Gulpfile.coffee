@@ -34,3 +34,25 @@ gulp.task 'concat', ->
   .pipe(gulp.dest("./public/"))
 
 gulp.task 'build', ["coffee","concat","copy"]
+
+#### Setup static server w/ livereload
+embedlr    = require 'gulp-embedlr'
+refresh    = require 'gulp-livereload'
+lrserver   = require('tiny-lr')()
+express    = require 'express'
+livereload = require 'connect-livereload'
+
+livereload_port = 35759
+server_port     = 5000
+
+server = express()
+server.use(livereload(
+  port: livereload_port
+))
+server.use express.static('./public')
+server.all '/*', (req,res) ->
+  res.sendFile('index.html', {root: "public"})
+
+gulp.task 'serve', ->
+  server.listen(server_port)
+  lrserver.listen(livereload_port)
