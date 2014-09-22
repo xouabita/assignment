@@ -19,5 +19,8 @@
     "angular": "~1.2.22",
     "ngInfiniteScroll": "~1.1.2",
     "jquery": "~2.1.1"
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.2.25"
   }
 }
