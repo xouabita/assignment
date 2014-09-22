@@ -5,6 +5,7 @@ coffee  = require 'gulp-coffee'
 compass = require 'gulp-compass'
 concat  = require 'gulp-concat'
 del     = require 'del'
+karma   = require('karma').server
 
 #### Setup static server w/ livereload
 embedlr    = require 'gulp-embedlr'
@@ -73,3 +74,10 @@ gulp.task 'serve', ["build"] , ->
 #### Clean the files
 gulp.task 'clean', ->
   del(['public'])
+
+#### Tests
+gulp.task 'test', (done) ->
+  karma.start(
+    configFile: __dirname + '/tests/karma.conf.coffee'
+    singleRun: true
+  , done)
